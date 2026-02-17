@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**Create a beautiful, interactive terminal portfolio — installable via `npx` or `npm i -g`**
+**Create a beautiful, interactive terminal portfolio — installable via `npx` or `npm and -g`**
 
 [![npm version](https://badge.fury.io/js/own-term-hackathon.svg)](https://www.npmjs.com/package/own-term-hackathon)
 [![CI](https://github.com/Biki-dev/own-term-hackathon/workflows/CI/badge.svg)](https://github.com/Biki-dev/own-term-hackathon/actions)
@@ -14,6 +14,10 @@
 </div>
 
 ---
+
+
+https://github.com/user-attachments/assets/ea7d45a4-2c91-4c86-afd4-7768ad4c1238
+
 
 ## What is own-term-hackathon?
 
