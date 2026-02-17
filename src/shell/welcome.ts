@@ -52,6 +52,8 @@ function colorLogoLine(line: string, row: number): string {
 // ─── Time helpers ─────────────────────────────────────────────────────────────
 
 function getTimeString(): string {
+  // Use a locale that matches the CLI language for nicer formatting
+  // (this only affects date/time formatting; portfolio content is user-provided).
   return new Date().toLocaleTimeString("en-US", {
     hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false,
   });
@@ -78,7 +80,9 @@ function getVersion(): string {
 function buildRightPanel(
   config: TermfolioConfig,
   theme: { primary: string; secondary: string; accent: string; dim: string },
-  panelWidth: number
+  panelWidth: number,
+  t: (key: string, vars?: Record<string, string | number>) => string,
+  meta: { themeName: string; projectCount: number; time: string; date: string; version: string }
 ): string[] {
   const cyan   = (s: string) => chalk.hex(theme.primary)(s);
   const purple = (s: string) => chalk.hex(theme.secondary)(s);
@@ -95,20 +99,20 @@ function buildRightPanel(
     dim(config.title || "Developer"),
     rule,
     _,
-    gold("v") + white(getVersion()) + "   " + dim("·") + "   " + cyan("⏱  ") + white(getTimeString()),
-    dim(getDateString()),
+    gold("v") + white(meta.version) + "   " + dim("·") + "   " + cyan("⏱  ") + white(meta.time),
+    dim(meta.date),
     rule,
     _,
-    cyan("  Get started"),
+    cyan("  " + t("welcome.get_started")),
     _,
-    dim("  › ") + cyan("about      ") + dim("Who I am"),
-    dim("  › ") + cyan("projects   ") + dim("What I've built"),
-    dim("  › ") + cyan("skills     ") + dim("My tech stack"),
-    dim("  › ") + cyan("contact    ") + dim("Reach out"),
+    dim("  › ") + cyan("about      ") + dim(t("welcome.who_i_am")),
+    dim("  › ") + cyan("projects   ") + dim(t("welcome.what_i_built")),
+    dim("  › ") + cyan("skills     ") + dim(t("welcome.my_stack")),
+    dim("  › ") + cyan("contact    ") + dim(t("welcome.reach_out")),
     _,
-    dim("  type ") + cyan(bold("help")) + dim(" for all commands"),
+    dim("  " + t("welcome.type_help", { help: cyan(bold("help")) })),
     _,
-    dim("  ") + purple("◆") + dim("  " + (config.theme ?? "dark") + " theme  ·  " + config.projects.length + " projects"),
+    dim("  ") + purple("◆") + dim("  " + t("welcome.theme_projects", { theme: meta.themeName, count: meta.projectCount })),
   ];
 }
 
@@ -118,12 +122,28 @@ export async function showWelcome(
   config: TermfolioConfig,
   context: CommandContext
 ): Promise<void> {
+  const lang = context.i18n.getLanguage();
+  const locale = lang === "hi" ? "hi-IN" : "en-US";
+  const time = new Date().toLocaleTimeString(locale, {
+    hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false,
+  });
+  const date = new Date().toLocaleDateString(locale, {
+    weekday: "short", year: "numeric", month: "short", day: "numeric",
+  });
+  const t = (key: string, vars?: Record<string, string | number>) => context.i18n.t(key, vars);
+
   const theme  = context.theme;
   const total  = Math.min(termWidth(), 110);
   const logoW  = Math.max(...LOGO_LINES.map((l) => l.length));
   const rightW = Math.max(32, total - logoW - 3);
 
-  const rightLines = buildRightPanel(config, theme, rightW);
+  const rightLines = buildRightPanel(config, theme, rightW, t, {
+    themeName: config.theme ?? "dark",
+    projectCount: config.projects.length,
+    time,
+    date,
+    version: getVersion(),
+  });
   const totalRows  = Math.max(LOGO_LINES.length, rightLines.length);
   const sep        = chalk.hex(theme.dim)("│");
 
@@ -162,14 +182,15 @@ export async function runBootSequence(
   const ts    = () => chalk.hex(theme.dim)(`[${new Date().toISOString()}]`);
   const msg   = (s: string) => chalk.hex("#6a6a9a")(s);
 
+  const t = (key: string, vars?: Record<string, string | number>) => context.i18n.t(key, vars);
   const lines: Array<[string, string]> = [
-    [sys,   "own-term starting..."],
-    [ok,    "Configuration loaded"],
-    [ok,    "Rendering engine initialized"],
-    [ok,    `Theme: ${context.config.theme ?? "dark"}`],
-    [ok,    "Plugin system ready"],
-    [ok,    "Shell engine started"],
-    [arrow, "Launching portfolio..."],
+    [sys,   t("boot.starting")],
+    [ok,    t("boot.config_loaded")],
+    [ok,    t("boot.renderer_ready")],
+    [ok,    t("boot.theme", { theme: context.config.theme ?? "dark" })],
+    [ok,    t("boot.plugins_ready")],
+    [ok,    t("boot.shell_ready")],
+    [arrow, t("boot.launching")],
   ];
 
   for (const [badge, text] of lines) {

@@ -3,7 +3,7 @@ import { loadConfig, getConfigTemplate } from "../src/config";
 
 describe("Config Loader", () => {
     it("should return default config when no config file exists", async () => {
-        const config = await loadConfig();
+        const config = await loadConfig(undefined, { skipCwdSearch: true });
 
         expect(config).toBeDefined();
         expect(config.name).toBe("Own-term");
@@ -11,7 +11,7 @@ describe("Config Loader", () => {
     });
 
     it("should validate required fields", async () => {
-        const config = await loadConfig();
+        const config = await loadConfig(undefined, { skipCwdSearch: true });
 
         expect(config.name).toBeDefined();
         expect(config.links).toBeDefined();

@@ -14,7 +14,7 @@ export default {
         {
             name: "Own-term Framework",
             desc: "A reusable terminal portfolio framework with plugin support",
-            repo: "https://github.com/Biki-dev/own-term",
+            repo: "https://github.com/Biki-dev/",
             tags: ["cli", "node", "typescript", "framework"],
             status: "active"
         }

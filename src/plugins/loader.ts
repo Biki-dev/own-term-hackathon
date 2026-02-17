@@ -43,6 +43,7 @@ async function loadPlugin(
             getConfig: () => context.config,
             render: context.render,
             theme: context.theme,
+            i18n: context.i18n,
         };
 
         // Register the plugin

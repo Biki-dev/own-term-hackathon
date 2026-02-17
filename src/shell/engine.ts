@@ -7,6 +7,7 @@ import { getTheme } from "../themes/default";
 import { registerCoreCommands } from "../commands";
 import { loadPlugins } from "../plugins/loader";
 import { showWelcome, runBootSequence } from "./welcome";
+import { createI18n, loadCliSettings } from "../i18n";
 
 export class ShellEngine {
   private router: Router;
@@ -16,11 +17,14 @@ export class ShellEngine {
   constructor(private config: TermfolioConfig) {
     const theme = getTheme(config.theme);
     const renderer = new Renderer(theme);
+    const i18n = createI18n("en");
+    renderer.setI18n(i18n);
 
     this.context = {
       config,
       render: renderer,
       theme,
+      i18n,
     };
 
     this.context.render.setTypewriterMode(true);
@@ -28,6 +32,11 @@ export class ShellEngine {
   }
 
   async init(): Promise<void> {
+    // Load persisted CLI settings (language) and hydrate i18n before registering commands
+    const settings = loadCliSettings();
+    this.context.i18n.setLanguage(settings.language);
+    this.context.render.setI18n(this.context.i18n);
+
     const coreCommands = registerCoreCommands(this.config, this.context);
     this.router.registerAll(coreCommands);
 
@@ -88,7 +97,11 @@ export class ShellEngine {
   private exit(): void {
     this.context.render.newline();
     const g = require("gradient-string");
-    console.log(g(this.context.theme.primary, this.context.theme.secondary)("Thanks for visiting! 👋"));
+    console.log(
+      g(this.context.theme.primary, this.context.theme.secondary)(
+        this.context.i18n.t("shell.thanks_for_visiting")
+      )
+    );
     this.context.render.newline();
     process.exit(0);
   }

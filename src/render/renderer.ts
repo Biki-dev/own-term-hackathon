@@ -4,11 +4,17 @@ import Table from "cli-table3";
 import gradient from "gradient-string";
 import { RenderAPI, BoxOptions, TextStyle, Theme } from "../types";
 import { typewriter } from "./effects";
+import type { I18n } from "../i18n";
 
 export class Renderer implements RenderAPI {
     private typewriterMode: boolean = false;
+    private i18n?: I18n;
 
     constructor(private theme: Theme) { }
+
+    setI18n(i18n: I18n): void {
+        this.i18n = i18n;
+    }
 
     /**
      * Enable or disable typewriter effect globally for animated text
@@ -36,7 +42,8 @@ export class Renderer implements RenderAPI {
      */
     table(data: Record<string, string>[], headers?: string[]): void {
         if (data.length === 0) {
-            this.text("No data to display", { color: this.theme.dim });
+            const msg = this.i18n?.t("table.no_data") ?? "No data to display";
+            this.text(msg, { color: this.theme.dim });
             return;
         }
 

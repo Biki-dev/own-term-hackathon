@@ -3,6 +3,7 @@ import inquirer from "inquirer";
 import open from "open";
 import { CommandHandler, CommandContext, TermfolioConfig } from "../types";
 import { showWelcome } from "../shell/welcome";
+import { saveCliSettings, type SupportedLanguage } from "../i18n";
 
 // ─── Shared helpers ──────────────────────────────────────────────────────────
 
@@ -32,6 +33,7 @@ export function registerCoreCommands(
 ): Record<string, CommandHandler> {
   const commands: Record<string, CommandHandler> = {};
   const theme = context.theme;
+  const t = (key: string, vars?: Record<string, string | number>) => context.i18n.t(key, vars);
 
   // ── Colour shortcuts ──────────────────────────────────────────────────────
   const cyan    = (s: string) => chalk.hex(theme.primary)(s);
@@ -46,7 +48,7 @@ export function registerCoreCommands(
   // ── HELP ──────────────────────────────────────────────────────────────────
   commands["help"] = async () => {
     context.render.newline();
-    console.log(sectionLabel("Commands Reference", theme.primary));
+    console.log(sectionLabel(t("help.title"), theme.primary));
     context.render.newline();
 
     const categories: Array<{
@@ -54,22 +56,23 @@ export function registerCoreCommands(
       items: Array<{ cmd: string; arg?: string; desc: string }>;
     }> = [
       {
-        label: "Portfolio",
+        label: t("help.portfolio"),
         items: [
-          { cmd: "about",    desc: "Who I am & my background" },
-          { cmd: "projects", desc: "Browse & explore projects" },
-          { cmd: "skills",   desc: "Technical skills & stack" },
-          { cmd: "contact",  desc: "Social links & email" },
-          { cmd: "resume",   desc: "Open resume PDF" },
+          { cmd: "about",    desc: t("help.about") },
+          { cmd: "projects", desc: t("help.projects") },
+          { cmd: "skills",   desc: t("help.skills") },
+          { cmd: "contact",  desc: t("help.contact") },
+          { cmd: "resume",   desc: t("help.resume") },
         ],
       },
       {
-        label: "System",
+        label: t("help.system"),
         items: [
-          { cmd: "theme", arg: "[name]", desc: "Switch color theme" },
-          { cmd: "clear",               desc: "Clear the terminal" },
-          { cmd: "help",                desc: "Show this reference" },
-          { cmd: "exit",                desc: "Exit the portfolio" },
+          { cmd: "theme",     arg: "[name]",   desc: t("help.theme") },
+          { cmd: "language",  arg: "[en|hi]",  desc: t("help.language") },
+          { cmd: "clear",                   desc: t("help.clear") },
+          { cmd: "help",                    desc: t("help.help") },
+          { cmd: "exit",                    desc: t("help.exit") },
         ],
       },
     ];
@@ -172,11 +175,11 @@ export function registerCoreCommands(
   // ── PROJECTS ──────────────────────────────────────────────────────────────
   commands["projects"] = async () => {
     context.render.newline();
-    console.log(sectionLabel("Projects", theme.primary));
+    console.log(sectionLabel(t("projects.title"), theme.primary));
     context.render.newline();
 
     if (config.projects.length === 0) {
-      context.render.warning("No projects found in config");
+      context.render.warning(t("projects.none"));
       return;
     }
 
@@ -185,7 +188,7 @@ export function registerCoreCommands(
       {
         type: "list",
         name: "chosen",
-        message: `${cyan("?")} Select a project  ${dim("(↑↓ navigate, Enter to view)")}`,
+        message: `${cyan("?")} ${t("projects.select")}`,
         choices: config.projects.map((p, i) => ({
           name:
             `${dim(`${String(i + 1).padStart(2, "0")}`)}  ` +
@@ -240,7 +243,7 @@ export function registerCoreCommands(
         {
           type: "confirm",
           name: "doOpen",
-          message: `${cyan("?")} Open in browser?`,
+          message: `${cyan("?")} ${t("projects.open_in_browser")}`,
           default: false,
           prefix: "",
         },
@@ -255,12 +258,12 @@ export function registerCoreCommands(
   // ── SKILLS ────────────────────────────────────────────────────────────────
   commands["skills"] = async () => {
     context.render.newline();
-    console.log(sectionLabel("Skills & Technologies", theme.primary));
+    console.log(sectionLabel(t("skills.title"), theme.primary));
     context.render.newline();
 
     const cats = Object.entries(config.skills).filter(([, v]) => v && v.length > 0);
     if (cats.length === 0) {
-      context.render.warning("No skills found in config");
+      context.render.warning(t("skills.none"));
       return;
     }
 
@@ -311,7 +314,7 @@ export function registerCoreCommands(
   // ── CONTACT ───────────────────────────────────────────────────────────────
   commands["contact"] = async () => {
     context.render.newline();
-    console.log(sectionLabel("Get In Touch", theme.primary));
+    console.log(sectionLabel(t("contact.title"), theme.primary));
     context.render.newline();
 
     const links = config.links;
@@ -326,7 +329,7 @@ export function registerCoreCommands(
     const entries = Object.entries(links).filter(([, v]) => v);
 
     if (entries.length === 0) {
-      context.render.warning("No contact links configured");
+      context.render.warning(t("contact.none"));
       return;
     }
 
@@ -351,7 +354,7 @@ export function registerCoreCommands(
     context.render.newline();
 
     console.log(
-      `  ${dim("tip:")} type ${cyan("open github")} · ${cyan("open email")} · ${cyan("open linkedin")} to open links`
+      `  ${dim(t("contact.tip"))}`
     );
     context.render.newline();
     console.log(divider(theme.dim));
@@ -362,41 +365,71 @@ export function registerCoreCommands(
   commands["open"] = async (args: string[]) => {
     const target = args[0]?.toLowerCase();
     if (!target) {
-      context.render.info("Usage: open [github|linkedin|email|website|twitter]");
+      context.render.info(t("open.usage"));
       return;
     }
     const url = config.links[target];
     if (!url) {
-      context.render.error(`No link configured for '${target}'`);
+      context.render.error(t("open.no_link", { target }));
       return;
     }
     const openUrl = target === "email" ? `mailto:${url}` : url;
-    context.render.info(`Opening ${target}: ${url}`);
+    context.render.info(t("open.opening", { target, url }));
     try {
       await open(openUrl);
-      context.render.success("Opened in browser!");
+      context.render.success(t("open.opened"));
     } catch {
-      context.render.error("Could not open URL");
+      context.render.error(t("open.failed"));
     }
   };
 
   // ── RESUME ────────────────────────────────────────────────────────────────
   commands["resume"] = async () => {
     if (config.resume) {
-      context.render.info(`Opening resume: ${config.resume}`);
+      context.render.info(t("resume.opening", { url: config.resume }));
       try {
         await open(config.resume);
-        context.render.success("Resume opened in your browser!");
+        context.render.success(t("resume.opened"));
       } catch {
-        context.render.error("Failed to open resume");
+        context.render.error(t("resume.failed"));
       }
     } else {
-      context.render.warning("No resume URL configured — add 'resume' to your termfolio.config");
+      context.render.warning(t("resume.none"));
     }
   };
 
   // ── CLEAR ─────────────────────────────────────────────────────────────────
   commands["clear"] = async () => {
+    context.render.clear();
+    await showWelcome(config, context);
+  };
+
+  // ── LANGUAGE ──────────────────────────────────────────────────────────────
+  commands["language"] = async (args: string[]) => {
+    const raw = args[0]?.trim();
+    if (!raw) {
+      context.render.info(t("language.usage"));
+      return;
+    }
+
+    const normalized = raw.toLowerCase();
+    const lang: SupportedLanguage | null =
+      normalized === "en" || normalized === "english" ? "en" :
+      normalized === "hi" || normalized === "hindi" || normalized === "hin" ? "hi" :
+      null;
+
+    if (!lang) {
+      context.render.error(t("language.invalid", { lang: raw }));
+      context.render.info(t("language.usage"));
+      return;
+    }
+
+    // Hot-swap language immediately + persist for next run
+    context.i18n.setLanguage(lang);
+    context.render.setI18n(context.i18n);
+    saveCliSettings({ language: lang });
+
+    context.render.success(t("language.changed", { lang }));
     context.render.clear();
     await showWelcome(config, context);
   };
@@ -407,7 +440,7 @@ export function registerCoreCommands(
     const themeName = args[0];
 
     context.render.newline();
-    console.log(sectionLabel("Themes", theme.primary));
+    console.log(sectionLabel(t("theme.title"), theme.primary));
     context.render.newline();
 
     if (!themeName) {
@@ -435,20 +468,20 @@ export function registerCoreCommands(
 
       context.render.newline();
       console.log(
-        `  ${dim("Usage:")} ${cyan("theme dark")}  ${dim("·")}  ${cyan("theme hacker")}  ${dim("etc.")}`
+        `  ${dim(t("theme.usage"))}`
       );
       console.log(
-        `  ${dim("Tip: Set")} ${gold("theme")} ${dim("in your termfolio.config.ts to persist")}`
+        `  ${dim(t("theme.tip"))}`
       );
     } else if (validThemes.includes(themeName)) {
-      context.render.success(`Theme '${themeName}' selected!`);
-      context.render.info("Restart own-term or update your config to apply.");
+      context.render.success(t("theme.selected", { theme: themeName }));
+      context.render.info(t("theme.restart"));
       console.log(
         `  ${dim("Add")} ${gold(`theme: "${themeName}"`)} ${dim("to termfolio.config.ts")}`
       );
     } else {
-      context.render.error(`Unknown theme: '${themeName}'`);
-      context.render.info(`Valid themes: ${validThemes.join(", ")}`);
+      context.render.error(t("theme.unknown", { theme: themeName }));
+      context.render.info(t("theme.valid", { themes: validThemes.join(", ") }));
     }
 
     context.render.newline();

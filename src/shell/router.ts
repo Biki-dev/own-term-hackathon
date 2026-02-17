@@ -63,11 +63,15 @@ export class Router {
             try {
                 await command.handler(args, this.context);
             } catch (error) {
-                this.context.render.error(`Error executing command: ${error}`);
+                this.context.render.error(
+                    this.context.i18n.t("router.error_executing_command", { error: String(error) })
+                );
             }
         } else {
-            this.context.render.error(`Unknown command: ${commandName}`);
-            this.context.render.text("Type 'help' to see available commands", {
+            this.context.render.error(
+                this.context.i18n.t("router.unknown_command", { command: commandName })
+            );
+            this.context.render.text(this.context.i18n.t("router.type_help_hint"), {
                 color: this.context.theme.dim
             });
         }

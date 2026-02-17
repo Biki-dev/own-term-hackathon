@@ -5,18 +5,25 @@ import { TermfolioConfig } from "./types";
 /**
  * Load configuration from user's termfolio.config file
  */
-export async function loadConfig(configPath?: string): Promise<TermfolioConfig> {
+export async function loadConfig(
+    configPath?: string,
+    options?: { skipCwdSearch?: boolean }
+): Promise<TermfolioConfig> {
     const cwd = process.cwd();
 
     // Try multiple config file locations
-    const possiblePaths = [
-        configPath,
-        join(cwd, "termfolio.config.ts"),
-        join(cwd, "termfolio.config.js"),
-        join(cwd, "termfolio.config.json"),
-        join(cwd, ".termfolio", "config.ts"),
-        join(cwd, ".termfolio", "config.js"),
-    ].filter(Boolean) as string[];
+    const possiblePaths = (
+        options?.skipCwdSearch
+            ? [configPath]
+            : [
+                configPath,
+                join(cwd, "termfolio.config.ts"),
+                join(cwd, "termfolio.config.js"),
+                join(cwd, "termfolio.config.json"),
+                join(cwd, ".termfolio", "config.ts"),
+                join(cwd, ".termfolio", "config.js"),
+            ]
+    ).filter(Boolean) as string[];
 
     for (const path of possiblePaths) {
         if (existsSync(path)) {

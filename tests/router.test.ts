@@ -3,12 +3,16 @@ import { Router } from "../src/shell/router";
 import { CommandContext } from "../src/types";
 import { Renderer } from "../src/render/renderer";
 import { darkTheme } from "../src/themes/default";
+import { createI18n } from "../src/i18n";
 
 describe("Router", () => {
     let router: Router;
     let context: CommandContext;
 
     beforeEach(() => {
+        const i18n = createI18n("en");
+        const render = new Renderer(darkTheme);
+        render.setI18n(i18n);
         context = {
             config: {
                 name: "Test",
@@ -17,8 +21,9 @@ describe("Router", () => {
                 projects: [],
                 skills: {},
             },
-            render: new Renderer(darkTheme),
+            render,
             theme: darkTheme,
+            i18n,
         };
         router = new Router(context);
     });

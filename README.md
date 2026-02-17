@@ -49,7 +49,7 @@ npx own-term
 
 ### Core Features (MVP)
 
-- ✅ Interactive shell with commands: `about`, `projects`, `skills`, `contact`, `resume`, `theme`
+- ✅ Interactive shell with commands: `about`, `projects`, `skills`, `contact`, `resume`, `theme`, `language`
 - ✅ Config file (`termfolio.config.ts`) for easy customization
 - ✅ Beautiful ASCII headers and boxed layouts
 - ✅ Color themes with gradient support
@@ -135,9 +135,15 @@ npx own-term --config=./termfolio.config.ts
 | `contact` | Get contact information |
 | `resume` | Open resume (if configured) |
 | `theme [name]` | Change theme |
+| `language [en\|hi]` | Change CLI language (English/Hindi) |
 | `clear` | Clear the terminal |
 | `help` | Show available commands |
 | `exit` | Exit the portfolio |
+
+### Localization (lingo.dev)
+
+- Translation files live in `locales/en.json` and `locales/hi.json`
+- lingo.dev config is in `i18n.json` (you can use the lingo.dev CLI to manage/generate translations)
 
 ### Configuration
 

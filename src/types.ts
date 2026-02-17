@@ -50,6 +50,7 @@ export interface CommandContext {
     config: TermfolioConfig;
     render: RenderAPI;
     theme: Theme;
+    i18n: import("./i18n").I18n;
 }
 
 export interface RenderAPI {
@@ -69,6 +70,7 @@ export interface RenderAPI {
     info: (message: string) => void;
     textAnimated: (content: string, style?: TextStyle) => Promise<void>;
     setTypewriterMode: (enabled: boolean) => void;
+    setI18n: (i18n: import("./i18n").I18n) => void;
 }
 
 export interface BoxOptions {
@@ -107,6 +109,7 @@ export interface PluginAPI {
     getConfig: () => TermfolioConfig;
     render: RenderAPI;
     theme: Theme;
+    i18n: import("./i18n").I18n;
 }
 
 export interface Command {
