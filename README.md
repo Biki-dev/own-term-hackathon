@@ -2,266 +2,260 @@
 
 <div align="center">
 
-![own-term-hackathon Banner](https://via.placeholder.com/800x200/00D9FF/FFFFFF?text=own-term-hackathon)
-
 **Create a beautiful, interactive terminal portfolio — installable via `npx` or `npm i -g`**
 
 [![npm version](https://badge.fury.io/js/own-term-hackathon.svg)](https://www.npmjs.com/package/own-term-hackathon)
-[![CI](https://github.com/yourusername/own-term-hackathon/workflows/CI/badge.svg)](https://github.com/yourusername/own-term-hackathon/actions)
+[![CI](https://github.com/Biki-dev/own-term-hackathon/workflows/CI/badge.svg)](https://github.com/Biki-dev/own-term-hackathon/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-[Demo](#demo) • [Features](#features) • [Quick Start](#quick-start) • [Documentation](#documentation) • [Contributing](#contributing)
+[Features](#-features) · [Quick Start](#-quick-start) · [Commands](#-commands) · [Themes](#-themes) · [i18n](#-localization-lingodev) · [Plugins](#-plugins) · [Contributing](#-contributing)
 
 </div>
 
 ---
 
-## 🎯 What is own-term-hackathon?
+## What is own-term-hackathon?
 
-**own-term-hackathon** is a powerful, reusable framework for creating beautiful terminal portfolios.  
-Not just a single person's portfolio — it's a complete framework that lets anyone create their own interactive terminal experience.
+**own-term-hackathon** is a reusable framework for building beautiful interactive terminal portfolios. Not just one person's portfolio — a complete system anyone can configure and run as their own.
 
-### Why own-term-hackathon?
-
-- 🎨 **Beautiful by default** - Stunning themes, gradients, and ASCII art
-- 🔌 **Plugin system** - Extend with custom commands and features
-- 🎭 **Multiple themes** - Dark, light, and hacker themes built-in
-- ⚡ **Zero config** - Works out of the box, customize when you want
-- 📦 **Easy to use** - Run with `npx` or install globally
-- 🛠️ **Developer friendly** - TypeScript, well-documented, tested
-
----
-
-## 📺 Demo
-
-![Demo GIF](https://via.placeholder.com/600x400/1a1a1a/00FF00?text=Demo+Coming+Soon)
-
-Try it now:
-
-```bash
-npx own-term-hackathon
-```
-
----
-
-## ✨ Features
-
-### Core Features (MVP)
-
-- ✅ Interactive shell with commands: `about`, `projects`, `skills`, `contact`, `resume`, `theme`, `language`
-- ✅ Config file (`termfolio.config.ts`) for easy customization
-- ✅ Beautiful ASCII headers and boxed layouts
-- ✅ Color themes with gradient support
-- ✅ Installable via npm / runnable via npx
-
-### Advanced Features
-
-- 🔌 Plugin system for custom commands
-- 🎨 Theme system (colors/fonts/spacing)
-- 📊 Component library (Box, Table, Charts)
-- 🧪 Full test coverage
-- 🚀 CI/CD pipeline
-- 📚 Comprehensive documentation
+- 🎨 **6 built-in themes** — dark, light, hacker, neo, dracula, nordic
+- 🌐 **AI-powered i18n** — English & Hindi via [lingo.dev](https://lingo.dev), switch live with `language hi`
+- 🔌 **Plugin system** — register custom commands without touching core code
+- ⚡ **Zero friction** — `npx own-term-hackathon` and you're in
+- 📦 **Config-driven** — one `termfolio.config.ts` file controls everything
+- 🛠️ **TypeScript throughout** — fully typed, tested with vitest
 
 ---
 
 ## 🚀 Quick Start
 
-### Try it instantly
-
 ```bash
+# Try it instantly
 npx own-term-hackathon
-```
 
-### Install globally
-
-```bash
+# Install globally
 npm install -g own-term-hackathon
 own-term-hackathon
-```
 
-### Create your own portfolio
-
-1. **Create a config file** (`termfolio.config.ts`):
-
-```typescript
-export default {
-  name: "Your Name",
-  title: "Your Title",
-  asciiLogo: "YOUR-NAME",
-  about: "A brief description about yourself",
-  theme: "dark", // dark, light, or hacker
-  links: {
-    github: "https://github.com/yourusername",
-    linkedin: "https://linkedin.com/in/yourusername",
-    email: "you@example.com"
-  },
-  projects: [
-    {
-      name: "Awesome Project",
-      desc: "Description of your project",
-      repo: "https://github.com/yourusername/project",
-      tags: ["javascript", "react"],
-      status: "active"
-    }
-  ],
-  skills: {
-    languages: ["JavaScript", "TypeScript", "Python"],
-    frameworks: ["React", "Node.js"],
-    tools: ["Git", "Docker", "VS Code"]
-  },
-  resume: "https://yourwebsite.com/resume.pdf"
-};
-```
-
-2. **Run your portfolio**:
-
-```bash
+# Run with your own config
 npx own-term-hackathon --config=./termfolio.config.ts
 ```
 
 ---
 
-## 📖 Documentation
+## ⚙️ Configuration
 
-### Available Commands
+Create a `termfolio.config.ts` in your project root:
+
+```typescript
+export default {
+  name: "Your Name",
+  title: "Full-Stack Developer",
+  about: "Your bio here.",
+  theme: "dark",                 // dark | light | hacker | neo | dracula | nordic
+  links: {
+    github:   "https://github.com/yourusername",
+    linkedin: "https://linkedin.com/in/yourusername",
+    email:    "you@example.com",
+    website:  "https://yourwebsite.com"
+  },
+  projects: [
+    {
+      name:   "Cool Project",
+      desc:   "What it does",
+      repo:   "https://github.com/yourusername/project",
+      tags:   ["typescript", "cli"],
+      status: "active"           // active | wip | archived
+    }
+  ],
+  skills: {
+    // Option 1 — plain strings (rendered as pills)
+    tools: ["Git", "Docker", "Linux"],
+
+    // Option 2 — with skill levels (rendered as progress bars)
+    languages: [
+      { name: "TypeScript", level: 92 },
+      { name: "Python",     level: 80 }
+    ]
+  },
+  resume: "https://yourwebsite.com/resume.pdf"
+};
+```
+
+See the [templates/](./templates/) directory for ready-to-use examples: `default`, `hacker`, `minimal`.
+
+---
+
+## 💬 Commands
 
 | Command | Description |
-|---------|------------|
-| `about` | Learn about the person |
-| `projects` | View projects |
-| `skills` | See skills and technologies |
-| `contact` | Get contact information |
-| `resume` | Open resume (if configured) |
-| `theme [name]` | Change theme |
-| `language [en\|hi]` | Change CLI language (English/Hindi) |
-| `clear` | Clear the terminal |
-| `help` | Show available commands |
+|---|---|
+| `about` | Name, title, bio, and skill tags |
+| `projects` | Interactive picker — browse, view details, open in browser |
+| `skills` | Skills as pills or animated progress bars |
+| `contact` | All configured links in a boxed layout |
+| `resume` | Opens your resume PDF in the browser |
+| `theme [name]` | Show theme gallery or switch theme |
+| `language [en\|hi]` | Switch CLI language (persists across sessions) |
+| `open [target]` | Shortcut: `open github`, `open email`, etc. |
+| `clear` | Clear and re-render the welcome screen |
+| `help` | Full command reference |
 | `exit` | Exit the portfolio |
 
-### Localization (lingo.dev)
+---
 
-- Translation files live in `locales/en.json` and `locales/hi.json`
-- lingo.dev config is in `i18n.json` (you can use the lingo.dev CLI to manage/generate translations)
+## 🎨 Themes
 
-### Configuration
+Six themes ship out of the box:
 
-See [templates/](./templates/) for example configurations:
+| Theme | Description |
+|---|---|
+| `dark` | Cyan & purple on black (default) |
+| `light` | Clean minimal light |
+| `hacker` | Matrix-style green terminal |
+| `neo` | Neon pink & cyan |
+| `dracula` | Classic Dracula palette |
+| `nordic` | Muted Nordic tones |
 
-- [Default](./templates/default/termfolio.config.ts) - Standard professional template
-- [Hacker](./templates/hacker/termfolio.config.ts) - Security researcher theme
-- [Minimal](./templates/minimal/termfolio.config.ts) - Bare essentials
+Switch at runtime with `theme dracula`, or set permanently in your config:
 
-### Themes
+```typescript
+theme: "dracula"
+```
 
-Built-in themes:
+---
 
-- **dark** (default) - Modern dark theme with cyan/purple accents
-- **light** - Clean light theme
-- **hacker** - Matrix-style green terminal
+## 🌐 Localization (lingo.dev)
 
-### Plugin Development
+Translations are managed with **[lingo.dev](https://lingo.dev)** — an AI-powered CLI tool that keeps locale files in sync automatically.
 
-Create custom plugins to extend functionality:
+### How it works
+
+- Source strings live in `locales/en.json`
+- lingo.dev translates them to all target locales defined in `i18n.json`
+- A lockfile (`i18n.lock`) tracks which strings have been translated so re-runs only process new content
+
+### Supported languages
+
+| Code | Language |
+|---|---|
+| `en` | English |
+| `hi` | Hindi |
+
+### Switching language at runtime
+
+```
+language hi      # switch to Hindi
+language en      # switch back to English
+```
+
+The setting persists across sessions (stored in `~/.own-term-hackathon/settings.json`).
+
+### Adding a new language
+
+1. Add the locale code to `i18n.json`:
+```json
+{
+  "locale": {
+    "source": "en",
+    "targets": ["hi", "es", "fr"]
+  }
+}
+```
+
+2. Run lingo.dev to generate the new locale file:
+```bash
+LINGODOTDEV_API_KEY=your_key npx lingo.dev@latest run
+```
+
+3. Add the new code to the `language` command in `src/commands/index.ts`.
+
+### Running translations locally
+
+```bash
+cp .env.example .env
+# Add your LINGODOTDEV_API_KEY to .env
+
+npx lingo.dev@latest run
+```
+
+---
+
+## 🔌 Plugins
+
+Extend the portfolio with custom commands:
 
 ```typescript
 import { createPlugin } from "own-term-hackathon";
 
 export default createPlugin("my-plugin", "1.0.0", (api) => {
-  api.registerCommand("custom", "My custom command", async (args) => {
-    api.render.header("Custom Command");
-    api.render.text("Hello from my plugin!");
+  api.registerCommand("greet", "Say hello", async (args) => {
+    api.render.header("Hello!");
+    api.render.text(`Hi, ${api.getConfig().name}`);
   });
 });
+```
+
+Register in your config:
+
+```typescript
+plugins: ["my-plugin-package"]
 ```
 
 ---
 
 ## 🛠️ Development
 
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-
-### Setup
-
 ```bash
-# Clone the repository
 git clone https://github.com/Biki-dev/own-term-hackathon.git
 cd own-term-hackathon
 
-# Install dependencies
 npm install
-
-# Run in development mode
-npm run dev
-
-# Build
-npm run build
-
-# Run tests
-npm test
-
-# Lint
-npm run lint
+npm run dev      # run with ts-node
+npm run build    # compile to bin/
+npm test         # vitest
+npm run lint     # eslint
+npm run format   # prettier
 ```
 
-### Project Structure
+### Project structure
 
 ```
 own-term-hackathon/
 ├── src/
 │   ├── cli.ts              # Entry point
-│   ├── config.ts           # Config loader
+│   ├── config.ts           # Config loader & validator
 │   ├── types.ts            # TypeScript definitions
-│   ├── shell/              # Shell engine & router
-│   ├── render/             # Rendering components
-│   ├── commands/           # Core commands
-│   ├── plugins/            # Plugin system
-│   └── themes/             # Theme definitions
-├── templates/              # Starter templates
-├── tests/                  # Test files
-└── bin/                    # Compiled output
+│   ├── i18n/               # i18n runtime (powered by lingo.dev locale files)
+│   ├── shell/              # Shell engine, router, welcome screen
+│   ├── render/             # Renderer + typewriter effects
+│   ├── commands/           # Core commands (about, projects, skills…)
+│   ├── plugins/            # Plugin loader & API
+│   └── themes/             # 6 built-in themes
+├── locales/                # Locale files managed by lingo.dev
+│   ├── en.json
+│   └── hi.json
+├── i18n.json               # lingo.dev config
+├── i18n.lock               # lingo.dev lockfile
+├── templates/              # Starter configs (default, hacker, minimal)
+└── tests/                  # vitest test suite
 ```
 
 ---
 
 ## 🤝 Contributing
 
-We love contributions! Please read our [Contributing Guide](CONTRIBUTING.md) to get started.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide. Quick version:
 
-### Ways to Contribute
-
-- 🐛 Report bugs
-- 💡 Suggest features
-- 📝 Improve documentation
-- 🎨 Create new themes
-- 🔌 Build plugins
-- ✅ Write tests
+1. Fork & clone
+2. `npm install && npm run dev`
+3. Branch from `main` — `git checkout -b feat/my-feature`
+4. Make changes, add tests, run `npm test && npm run lint`
+5. Open a PR with a conventional commit title
 
 ---
 
 ## 📄 License
 
 MIT © [Biki-dev](https://github.com/Biki-dev)
-
-See [LICENSE](LICENSE) for details.
-
----
-
-## 🌟 Showcase
-
-Using own-term-hackathon for your portfolio? Add it here!
-
-- [Your Portfolio](https://github.com/yourusername/portfolio) - Your Name
----
-
-<div align="center">
-
-**Made with ❤️ by developers, for developers**
-
-[⬆ Back to top](#own-term-hackathon-)
-
-</div>
