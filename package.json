@@ -1,5 +1,5 @@
 {
-  "name": "own-term",
+  "name": "own-term-hackathon",
   "version": "0.1.0",
   "description": "Create a beautiful, interactive terminal portfolio — installable via npx or npm i -g",
   "keywords": [
@@ -23,10 +23,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Biki-dev/own-term"
+    "url": "https://github.com/Biki-dev/own-term-hackathon"
   },
   "bin": {
-    "own-term": "./bin/cli.js",
+    "own-term-hackathon": "./bin/cli.js",
     "termfolio": "./bin/cli.js"
   },
   "main": "./bin/cli.js",

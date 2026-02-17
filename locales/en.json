@@ -14,7 +14,7 @@
   "welcome.type_help": "type {help} for all commands",
   "table.no_data": "No data to display",
   "welcome.theme_projects": "{theme} theme  ·  {count} projects",
-  "boot.starting": "own-term starting...",
+  "boot.starting": "own-term-hackathon starting...",
   "boot.config_loaded": "Configuration loaded",
   "boot.renderer_ready": "Rendering engine initialized",
   "boot.theme": "Theme: {theme}",
@@ -56,7 +56,7 @@
   "theme.usage": "Usage: theme dark  ·  theme hacker  etc.",
   "theme.tip": "Tip: Set theme in your termfolio.config.ts to persist",
   "theme.selected": "Theme '{theme}' selected!",
-  "theme.restart": "Restart own-term or update your config to apply.",
+  "theme.restart": "Restart own-term-hackathon or update your config to apply.",
   "theme.unknown": "Unknown theme: '{theme}'",
   "theme.valid": "Valid themes: {themes}"
 }

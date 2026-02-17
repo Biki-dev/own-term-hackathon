@@ -14,7 +14,7 @@
   "welcome.type_help": "सभी कमांड के लिए {help} टाइप करें",
   "table.no_data": "दिखाने के लिए कोई डेटा नहीं है",
   "welcome.theme_projects": "{theme} थीम  ·  {count} प्रोजेक्ट",
-  "boot.starting": "own-term शुरू हो रहा है...",
+  "boot.starting": "own-term-hackathon शुरू हो रहा है...",
   "boot.config_loaded": "कॉन्फ़िगरेशन लोड हो गया",
   "boot.renderer_ready": "रेंडरिंग इंजन तैयार",
   "boot.theme": "थीम: {theme}",
@@ -56,7 +56,7 @@
   "theme.usage": "उपयोग: theme dark  ·  theme hacker  आदि।",
   "theme.tip": "टिप: स्थायी करने के लिए termfolio.config.ts में theme सेट करें",
   "theme.selected": "थीम '{theme}' चुनी गई!",
-  "theme.restart": "लागू करने के लिए own-term रीस्टार्ट करें या कॉन्फ़िग अपडेट करें।",
+  "theme.restart": "लागू करने के लिए own-term-hackathon रीस्टार्ट करें या कॉन्फ़िग अपडेट करें।",
   "theme.unknown": "अज्ञात थीम: '{theme}'",
   "theme.valid": "मान्य थीम्स: {themes}"
 }

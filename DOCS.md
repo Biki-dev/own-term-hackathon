@@ -1,9 +1,9 @@
-# Own-term Project Documentation
+# own-term-hackathon Project Documentation
 
 ## 📁 Project Structure
 
 ```
-Own-term/
+own-term-hackathon/
 ├── .github/
 │   ├── workflows/
 │   │   ├── ci.yml                    # CI pipeline
@@ -135,7 +135,7 @@ export default {
 2. Run with your config:
 
 ```bash
-npx own-term --config=./termfolio.config.ts
+npx own-term-hackathon --config=./termfolio.config.ts
 ```
 
 ---
@@ -170,7 +170,7 @@ export const myTheme: Theme = {
 ### Creating a Plugin
 
 ```typescript
-import { createPlugin } from "own-term";
+import { createPlugin } from "own-term-hackathon";
 
 export default createPlugin("my-plugin", "1.0.0", (api) => {
   api.registerCommand(
@@ -231,7 +231,7 @@ describe("Feature", () => {
 1. Update version in `package.json`
 2. Update `CHANGELOG.md`
 3. Build the project: `npm run build`
-4. Test locally: `npm link` then `own-term`
+4. Test locally: `npm link` then `own-term-hackathon`
 
 ### Publish to npm
 
@@ -305,7 +305,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contribution guidelines.
 
 ## 📄 License
 
-MIT © Own-term Contributors
+MIT © own-term-hackathon Contributors
 
 ---
 

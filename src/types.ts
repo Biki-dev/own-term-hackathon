@@ -1,5 +1,5 @@
 /**
- * Core type definitions for Own-term framework
+ * Core type definitions for own-term-hackathon framework
  */
 
 export interface TermfolioConfig {

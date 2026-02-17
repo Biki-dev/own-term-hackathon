@@ -1,6 +1,6 @@
-# Contributing to Own-term
+# Contributing to own-term-hackathon
 
-First off, thank you for considering contributing to Own-term! 🎉
+First off, thank you for considering contributing to own-term-hackathon! 🎉
 
 ## Table of Contents
 
@@ -66,11 +66,11 @@ Feature suggestions are welcome! Please:
 
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR_USERNAME/own-term.git
-cd own-term
+git clone https://github.com/YOUR_USERNAME/own-term-hackathon.git
+cd own-term-hackathon
 
 # Add upstream remote
-git remote add upstream https://github.com/Biki-dev/own-term.git
+git remote add upstream https://github.com/Biki-dev/own-term-hackathon.git
 
 # Install dependencies
 npm install

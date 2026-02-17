@@ -32,7 +32,7 @@ If applicable, add screenshots or terminal output to help explain your problem.
 
 - **OS**: [e.g., macOS 13.0, Ubuntu 22.04, Windows 11]
 - **Node Version**: [e.g., 18.16.0]
-- **Own-term Version**: [e.g., 0.1.0]
+- **own-term-hackathon Version**: [e.g., 0.1.0]
 - **Terminal**: [e.g., iTerm2, Windows Terminal, GNOME Terminal]
 
 ## Configuration

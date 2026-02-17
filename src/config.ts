@@ -70,20 +70,20 @@ function validateConfig(config: Partial<TermfolioConfig>): TermfolioConfig {
  */
 function getDefaultConfig(): TermfolioConfig {
     return {
-        name: "Own-term",
+        name: "own-term-hackathon",
         title: "Terminal Portfolio Framework",
-        asciiLogo: "OWN-TERM",
-        about: "A beautiful, interactive terminal portfolio framework. Create your own with 'npx create-own-term'!",
+        asciiLogo: "own-term-hackathon",
+        about: "A beautiful, interactive terminal portfolio framework. Create your own with 'npx create-own-term-hackathon'!",
         theme: "dark",
         links: {
-            github: "https://github.com/Biki-dev/own-term",
+            github: "https://github.com/Biki-dev/own-term-hackathon",
             email:  "Bikikalitadev@gmail.com",
         },
         projects: [
             {
-                name: "Own-term",
+                name: "own-term-hackathon",
                 desc: "Reusable terminal portfolio framework",
-                repo: "https://github.com/yourusername/own-term",
+                repo: "https://github.com/yourusername/own-term-hackathon",
                 tags: ["cli", "node", "typescript"],
                 status: "active",
             },

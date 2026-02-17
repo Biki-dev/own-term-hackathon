@@ -70,8 +70,8 @@ export function getDefaultCliSettings(): CliSettings {
 
 function getSettingsDir(): string {
   const appData = process.platform === "win32" ? process.env.APPDATA : undefined;
-  if (appData) return path.join(appData, "own-term");
-  return path.join(os.homedir(), ".own-term");
+  if (appData) return path.join(appData, "own-term-hackathon");
+  return path.join(os.homedir(), ".own-term-hackathon");
 }
 
 export function getSettingsPath(): string {

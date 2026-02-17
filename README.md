@@ -1,13 +1,13 @@
-# Own-term 🚀
+# own-term-hackathon 🚀
 
 <div align="center">
 
-![Own-term Banner](https://via.placeholder.com/800x200/00D9FF/FFFFFF?text=Own-term)
+![own-term-hackathon Banner](https://via.placeholder.com/800x200/00D9FF/FFFFFF?text=own-term-hackathon)
 
 **Create a beautiful, interactive terminal portfolio — installable via `npx` or `npm i -g`**
 
-[![npm version](https://badge.fury.io/js/own-term.svg)](https://www.npmjs.com/package/own-term)
-[![CI](https://github.com/yourusername/own-term/workflows/CI/badge.svg)](https://github.com/yourusername/own-term/actions)
+[![npm version](https://badge.fury.io/js/own-term-hackathon.svg)](https://www.npmjs.com/package/own-term-hackathon)
+[![CI](https://github.com/yourusername/own-term-hackathon/workflows/CI/badge.svg)](https://github.com/yourusername/own-term-hackathon/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
@@ -17,12 +17,12 @@
 
 ---
 
-## 🎯 What is Own-term?
+## 🎯 What is own-term-hackathon?
 
-**Own-term** is a powerful, reusable framework for creating beautiful terminal portfolios.  
+**own-term-hackathon** is a powerful, reusable framework for creating beautiful terminal portfolios.  
 Not just a single person's portfolio — it's a complete framework that lets anyone create their own interactive terminal experience.
 
-### Why Own-term?
+### Why own-term-hackathon?
 
 - 🎨 **Beautiful by default** - Stunning themes, gradients, and ASCII art
 - 🔌 **Plugin system** - Extend with custom commands and features
@@ -40,7 +40,7 @@ Not just a single person's portfolio — it's a complete framework that lets any
 Try it now:
 
 ```bash
-npx own-term
+npx own-term-hackathon
 ```
 
 ---
@@ -71,14 +71,14 @@ npx own-term
 ### Try it instantly
 
 ```bash
-npx own-term
+npx own-term-hackathon
 ```
 
 ### Install globally
 
 ```bash
-npm install -g own-term
-own-term
+npm install -g own-term-hackathon
+own-term-hackathon
 ```
 
 ### Create your own portfolio
@@ -118,7 +118,7 @@ export default {
 2. **Run your portfolio**:
 
 ```bash
-npx own-term --config=./termfolio.config.ts
+npx own-term-hackathon --config=./termfolio.config.ts
 ```
 
 ---
@@ -166,7 +166,7 @@ Built-in themes:
 Create custom plugins to extend functionality:
 
 ```typescript
-import { createPlugin } from "own-term";
+import { createPlugin } from "own-term-hackathon";
 
 export default createPlugin("my-plugin", "1.0.0", (api) => {
   api.registerCommand("custom", "My custom command", async (args) => {
@@ -189,8 +189,8 @@ export default createPlugin("my-plugin", "1.0.0", (api) => {
 
 ```bash
 # Clone the repository
-git clone https://github.com/Biki-dev/own-term.git
-cd own-term
+git clone https://github.com/Biki-dev/own-term-hackathon.git
+cd own-term-hackathon
 
 # Install dependencies
 npm install
@@ -211,7 +211,7 @@ npm run lint
 ### Project Structure
 
 ```
-own-term/
+own-term-hackathon/
 ├── src/
 │   ├── cli.ts              # Entry point
 │   ├── config.ts           # Config loader
@@ -253,7 +253,7 @@ See [LICENSE](LICENSE) for details.
 
 ## 🌟 Showcase
 
-Using Own-term for your portfolio? Add it here!
+Using own-term-hackathon for your portfolio? Add it here!
 
 - [Your Portfolio](https://github.com/yourusername/portfolio) - Your Name
 ---
@@ -262,6 +262,6 @@ Using Own-term for your portfolio? Add it here!
 
 **Made with ❤️ by developers, for developers**
 
-[⬆ Back to top](#own-term-)
+[⬆ Back to top](#own-term-hackathon-)
 
 </div>

@@ -6,7 +6,7 @@ describe("Config Loader", () => {
         const config = await loadConfig(undefined, { skipCwdSearch: true });
 
         expect(config).toBeDefined();
-        expect(config.name).toBe("Own-term");
+        expect(config.name).toBe("own-term-hackathon");
         expect(config.title).toBe("Terminal Portfolio Framework");
     });
 
